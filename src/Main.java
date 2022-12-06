@@ -12,6 +12,17 @@ public class Main extends PApplet {
     PImage background;
     Minim loader;
     AudioPlayer song;
+    AudioPlayer explosion;
+
+    int loadScreenCounter = 300;
+    boolean loadScreenCondition = true;
+    PImage loadScreen;
+
+    boolean move = false;
+
+    boolean isHitting = false;
+    boolean wasHitting = false;
+    PImage bomb;
 
     public void settings() {
         size(600, 600);
@@ -47,11 +58,17 @@ public class Main extends PApplet {
 
         background = loadImage("image.png");
         background.resize(600, 600);
+        bomb = loadImage("bomb.png");
+        bomb.resize(100, 100);
+
+        loadScreen = loadImage("LoadingScreen.png");
 
         loader = new Minim(this);
         song = loader.loadFile("background_music.mp3");
+        explosion = loader.loadFile("explosion.mp3");
         song.play();
         song.loop();
+        loadScreenCounter = 0;
     }
 
     public void draw() {
@@ -62,37 +79,35 @@ public class Main extends PApplet {
         fill(158, 53, 232);
         ellipse(mouseX, mouseY, 50, 50);
         //shape1
-        fill(s1c);
-        rect(x1, y1, 50, 100);
+        image(bomb, x1, y1);
         //shape2
-        fill(s2c);
-        rect(x2, y2, 75, 75);
+        image(bomb, x2, y2);
         //shape3
-        fill(s3c);
-        rect(x3, y3, 150, 100);
+        image(bomb, x3, y3);
         //shape4
-        fill(s4c);
-        rect(x4, y4, 45, 80);
+        image(bomb, x4, y4);
         //lives text
         fill(255, 255, 255);
         text("Lives: " + lives, 500, 50);
 
         //MOVEMENT
-        x1 = x1 + x1s;
-        y1 = y1 + y1s;
-        x2 = x2 + x2s;
-        y2 = y2 + y2s;
-        x3 = x3 + x3s;
-        y3 = y3 + y3s;
-        x4 = x4 + x4s;
-        y4 = y4 + y4s;
+        if(move) {
+            x1 = x1 + x1s;
+            y1 = y1 + y1s;
+            x2 = x2 + x2s;
+            y2 = y2 + y2s;
+            x3 = x3 + x3s;
+            y3 = y3 + y3s;
+            x4 = x4 + x4s;
+            y4 = y4 + y4s;
+        }
 
         //BOUNCING
         //shape1
-        if (x1 <= 0) {
+        if (x1 + 25 <= 0) {
             x1s = -x1s;
         }
-        if (x1 + 50 >= width) {
+        if (x1 + 75 >= width) {
             x1s = -x1s;
         }
         if (y1 <= 0) {
@@ -102,7 +117,7 @@ public class Main extends PApplet {
             y1s = -y1s;
         }
         //shape2
-        if (x2 <= 0) {
+        if (x2 + 25 <= 0) {
             x2s = -x2s;
         }
         if (x2 + 75 >= width) {
@@ -111,14 +126,14 @@ public class Main extends PApplet {
         if (y2 <= 0) {
             y2s = -y2s;
         }
-        if (y2 + 75 >= height) {
+        if (y2 + 100 >= height) {
             y2s = -y2s;
         }
         //shape3
-        if (x3 <= 0) {
+        if (x3 + 25 <= 0) {
             x3s = -x3s;
         }
-        if (x3 + 150 >= width) {
+        if (x3 + 75 >= width) {
             x3s = -x3s;
         }
         if (y3 <= 0) {
@@ -128,31 +143,27 @@ public class Main extends PApplet {
             y3s = -y3s;
         }
         //shape4
-        if (x4 <= 0) {
+        if (x4 + 25 <= 0) {
             x4s = -x4s;
         }
-        if (x4 + 45 >= width) {
+        if (x4 + 75 >= width) {
             x4s = -x4s;
         }
         if (y4 <= 0) {
             y4s = -y4s;
         }
-        if (y4 + 80 >= height) {
+        if (y4 + 100 >= height) {
             y4s = -y4s;
         }
 
         //LIVES AND COLLISIONS
         //shape1
+        wasHitting = isHitting;
+        isHitting = false;
         if (mouseX >= x1 && mouseX <= x1 + 50 && mouseY >= y1 && mouseY <= y1 + 100) {
-            lives = --lives;
-            x1 = 300;
-            y1 = 300;
-            x2 = 300;
-            y2 = 300;
-            x3 = 300;
-            y3 = 300;
-            x4 = 300;
-            y4 = 300;
+            isHitting = true;
+            explosion.play();
+            explosion.rewind();
 
             if (x1s < 0) {
                 x1s = -x1s;
@@ -190,15 +201,9 @@ public class Main extends PApplet {
         }
         //shape2
         if (mouseX >= x2 && mouseX <= x2 + 75 && mouseY >= y2 && mouseY <= y2 + 75) {
-            lives = --lives;
-            x1 = 300;
-            y1 = 300;
-            x2 = 300;
-            y2 = 300;
-            x3 = 300;
-            y3 = 300;
-            x4 = 300;
-            y4 = 300;
+            isHitting = true;
+            explosion.play();
+            explosion.rewind();
 
             if (x1s < 0) {
                 x1s = -x1s;
@@ -236,15 +241,9 @@ public class Main extends PApplet {
         }
         //shape3
         if (mouseX >= x3 && mouseX <= x3 + 150 && mouseY >= y3 && mouseY <= y3 + 100) {
-            lives = --lives;
-            x1 = 300;
-            y1 = 300;
-            x2 = 300;
-            y2 = 300;
-            x3 = 300;
-            y3 = 300;
-            x4 = 300;
-            y4 = 300;
+            isHitting = true;
+            explosion.play();
+            explosion.rewind();
 
             if (x1s < 0) {
                 x1s = -x1s;
@@ -282,15 +281,9 @@ public class Main extends PApplet {
         }
         //shape4
         if (mouseX >= x4 && mouseX <= x4 + 45 && mouseY >= y4 && mouseY <= y4 + 80) {
-            lives = --lives;
-            x1 = 300;
-            y1 = 300;
-            x2 = 300;
-            y2 = 300;
-            x3 = 300;
-            y3 = 300;
-            x4 = 300;
-            y4 = 300;
+            isHitting = true;
+            explosion.play();
+            explosion.rewind();
 
             if (x1s < 0) {
                 x1s = -x1s;
@@ -326,6 +319,9 @@ public class Main extends PApplet {
             x4s = x4s + 3;
             y4s = y4s + 3;
         }
+        if(wasHitting == false && isHitting == true) {
+            lives--;
+        }
 
         //score
         if (lives > 0) {
@@ -334,6 +330,11 @@ public class Main extends PApplet {
         fill(255, 255, 255);
         text("Score: " + score / 30, 50, 50);
 
+        if(lives <= 0) {
+            explosion.setGain(-100);
+        } else {
+            explosion.setGain(0);
+        }
 
         //GAMEOVER
         if (lives <= 0) {
@@ -372,6 +373,19 @@ public class Main extends PApplet {
                     song.play();
                 }
             }
+        }
+
+        if(loadScreenCondition) {
+            image(loadScreen, 0, 0);
+            text("Game starting in "+(loadScreenCounter/30), 235, 425);
+            if(loadScreenCounter > 0) {
+                loadScreenCounter--;
+            } else {
+                loadScreenCondition = false;
+                move = true;
+                score = 0;
+            }
+
         }
     }
 
