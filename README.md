@@ -12,7 +12,7 @@ Highest Score: 0rang-3 --> 556
 
 ### Dependencies
 
-* (Java 1.8)[https://www.java.com/en/download/manual.jsp]
+* [Java 1.8](https://www.java.com/en/download/manual.jsp)
 * A Java IDE (preferably IntelliJ)
 
 ### Installing
