@@ -13,12 +13,20 @@ Highest Score: 0rang-3 --> 556
 ### Dependencies
 
 * [Java 1.8](https://www.java.com/en/download/manual.jsp)
-* A Java IDE (preferably IntelliJ)
+* A Java IDE (preferably [IntelliJ](https://www.jetbrains.com/idea/download/#section=mac))
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* To install, use one of the following commands to clone the repository onto your computer
+
+If you have SSH set up, type the following in your terminal:
+```
+git clone git@github.com:0rang-3/Bomb-Dodge.git
+```
+If you do no thav eSSH set up, type the following in your terminal:
+```
+git clone https://github.com/0rang-3/Bomb-Dodge.git
+```
 
 ### Executing program
 
