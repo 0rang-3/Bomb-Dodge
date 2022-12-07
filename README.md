@@ -23,17 +23,20 @@ If you have SSH set up, type the following in your terminal:
 ```
 git clone git@github.com:0rang-3/Bomb-Dodge.git
 ```
-If you do no thav eSSH set up, type the following in your terminal:
+If you do not have SSH set up, type the following in your terminal:
 ```
 git clone https://github.com/0rang-3/Bomb-Dodge.git
 ```
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+* To excute the progam, run the Main class in your IDE by clicking the run button or by typing the following in your terminal
 ```
-code blocks for commands
+java Main.java
+
+OR
+
+javac Main.java
 ```
 
 ## Help
