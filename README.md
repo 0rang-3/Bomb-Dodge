@@ -45,7 +45,7 @@ If you have any problems, please open an issue in this repository
 
 ## Authors
 
-* (0rang-3)[https://github.com/0rang-3]
+* [0rang-3](https://github.com/0rang-3)
 
 ## Version History
 
@@ -60,4 +60,4 @@ This project is licensed under the Apache 2.0 License - see the LICENSE.md file 
 
 ## Acknowledgments
 
-* (Canva)[https://canva.com]
+* [Canva](https://canva.com)
