@@ -33,9 +33,9 @@ git clone https://github.com/0rang-3/Bomb-Dodge.git
 * To excute the progam, run the Main class in your IDE by clicking the run button or by typing the following in your terminal
 ```
 java Main.java
-
+```
 OR
-
+```
 javac Main.java
 ```
 
