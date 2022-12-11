@@ -1,6 +1,6 @@
 # Bomb Dodge
 
-A java-based game
+A java-based game to dodge the bombs on screen!
 
 ## Description
 
